@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#fff"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Citizen.FileComplaint">
+    <RelativeLayout
+        android:id="@+id/relativelayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/cranePurple">
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:layout_margin="10dp"
+        android:fontFamily="@font/ubuntu"
+        android:textColor="@color/grey"
+        android:text="Lodge a complaint with Kerala Police"/>
+    </RelativeLayout>
+
+<TextView
+    android:id="@+id/district"
+    android:layout_below="@id/relativelayout"
+    android:layout_width="wrap_content"
+    android:layout_marginTop="30dp"
+    android:layout_marginLeft="10dp"
+    android:textColor="@color/cranePurple"
+    android:layout_marginRight="30dp"
+    android:layout_height="wrap_content"
+    android:text="District"/>
+    <EditText
+        android:id="@+id/district_spinner"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:hint="Select District"
+        android:elevation="20dp"
+        android:layout_marginTop="5dp"
+        android:layout_alignLeft="@id/district"
+        android:layout_below="@id/district"
+        android:background="@drawable/edittext_border_new"
+        android:layout_toRightOf="@id/district"/>
+    <TextView
+        android:id="@+id/policestation"
+        android:layout_below="@id/district_spinner"
+        android:layout_width="wrap_content"
+        android:layout_marginTop="30dp"
+        android:textColor="@color/cranePurple"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="30dp"
+        android:layout_height="wrap_content"
+        android:text="Police Station"/>
+    <EditText
+        android:id="@+id/selectps"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="5dp"
+        android:elevation="20dp"
+        android:hint="Select PoliceStation"
+        android:background="@drawable/edittext_border_new"
+        android:layout_below="@id/policestation"/>
+    <TextView
+        android:id="@+id/complainttype"
+        android:layout_below="@id/selectps"
+        android:layout_width="wrap_content"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="10dp"
+        android:textColor="@color/cranePurple"
+        android:layout_marginRight="30dp"
+        android:layout_height="wrap_content"
+        android:text="Complaint Type"/>
+    <EditText
+        android:id="@+id/complainttypeedit"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:elevation="20dp"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/edittext_border_new"
+        android:layout_below="@id/complainttype"/>
+    <TextView
+        android:id="@+id/place"
+        android:layout_below="@id/complainttypeedit"
+        android:layout_width="wrap_content"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="10dp"
+        android:textColor="@color/cranePurple"
+        android:layout_marginRight="30dp"
+        android:layout_height="wrap_content"
+        android:text="Place of Occurence"/>
+    <EditText
+        android:id="@+id/place_edit"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="5dp"
+        android:elevation="20dp"
+        android:background="@drawable/edittext_border_new"
+        android:layout_below="@id/place"/>
+    <TextView
+        android:id="@+id/date"
+        android:layout_below="@id/place_edit"
+        android:layout_width="wrap_content"
+        android:layout_marginTop="30dp"
+        android:textColor="@color/cranePurple"
+        android:layout_marginLeft="10dp"
+        android:layout_height="wrap_content"
+        android:text="Date "/>
+    <EditText
+        android:id="@+id/date_edit"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:elevation="20dp"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/edittext_border_new"
+        android:layout_below="@id/date"/>
+
+    <TextView
+        android:id="@+id/time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/date"
+        android:textColor="@color/cranePurple"
+        android:layout_centerHorizontal="true"
+        android:text="Time " />
+
+    <EditText
+        android:id="@+id/time_edit"
+        android:layout_width="100dp"
+        android:layout_alignLeft="@id/time"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:elevation="20dp"
+        android:background="@drawable/edittext_border_new"
+        android:layout_below="@id/date"/>
+    <TextView
+        android:id="@+id/details"
+        android:layout_below="@id/time_edit"
+        android:layout_width="wrap_content"
+        android:layout_marginTop="30dp"
+        android:textColor="@color/cranePurple"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="30dp"
+        android:layout_height="wrap_content"
+        android:text="Complaint Type"/>
+    <EditText
+        android:id="@+id/detailsedit"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="5dp"
+        android:inputType="textMultiLine"
+        android:elevation="20dp"
+        android:gravity="top"
+        android:background="@drawable/edittext_border_new"
+        android:layout_below="@id/details"/>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Submit"
+        android:textColor="@color/grey"
+        android:elevation="30dp"
+        android:layout_below="@id/detailsedit"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
+        android:background="@color/cranePurple"/>
+"/>
+</RelativeLayout>
+</ScrollView>

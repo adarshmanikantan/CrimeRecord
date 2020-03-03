@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">Crime Record</string>
+    <array name="menuOptions">
+        <item>Complaints</item>
+        <item>Requests</item>
+        <item>IPC Sections</item>
+        <item>Profile</item>
+        <item>About</item>
+    </array>
+    <array name="districts">
+        <item>Complaints</item>
+        <item>Requests</item>
+        <item>IPC Sections</item>
+        <item>Profile</item>
+        <item>About</item>
+    </array>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>
