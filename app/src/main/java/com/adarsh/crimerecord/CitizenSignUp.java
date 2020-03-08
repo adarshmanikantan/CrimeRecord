@@ -186,7 +186,7 @@ public class CitizenSignUp extends AppCompatActivity {
 
                     if (verifyData()) {
                         Toast.makeText(this, scanData, Toast.LENGTH_SHORT).show();
-                        if (scanData.contains(name_edt.getText().toString())) {
+           //           if (scanData.contains(name_edt.getText().toString())) {
                             displayScannedData();
 
                             //Retro
@@ -227,10 +227,20 @@ public class CitizenSignUp extends AppCompatActivity {
                                 public void onResponse(Call<CitizenRegisterModel> call, Response<CitizenRegisterModel> response) {
 
                                     CitizenRegisterModel citizenRegisterModel = response.body();
-
+                                    Toast.makeText(CitizenSignUp.this, house, Toast.LENGTH_SHORT).show();
 
                                     try {
-                                        String status = citizenRegisterModel.getStatus();
+                                        if(response.body()==null)
+                                        {
+                                            Toast.makeText(CitizenSignUp.this,"Failed", Toast.LENGTH_SHORT).show();
+                                        }
+                                        else {
+                                            String status = citizenRegisterModel.getStatus();
+                                            if (status.equalsIgnoreCase("success")) {
+                                                Intent i = new Intent(CitizenSignUp.this, CitizenHome.class);
+                                                startActivity(i);
+                                            }
+                                        }
                                     }catch (Exception e)
                                     {
                                         Toast.makeText(CitizenSignUp.this, "status fail"+e, Toast.LENGTH_SHORT).show();
@@ -254,9 +264,10 @@ public class CitizenSignUp extends AppCompatActivity {
                             });
 
 
-                        } else {
-                            Toast.makeText(this, "Invalid Aadhar card", Toast.LENGTH_SHORT).show();
-                        }
+//                      }
+//                        else {
+//                            Toast.makeText(this, "Invalid Aadhar card", Toast.LENGTH_SHORT).show();
+//                        }
                     }
 
                 } else if (eventType == XmlPullParser.END_TAG) {

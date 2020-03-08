@@ -13,7 +13,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Testsignup"></activity>
+        <activity android:name=".Citizen.ComplaintEncryption"></activity>
+        <activity android:name=".Citizen.ComplaintStatus" />
+        <activity android:name=".Testsignup" />
         <activity android:name=".Citizen.FileComplaint" />
         <activity android:name=".CitizenHome" />
         <activity android:name=".CitizenSignUp" />

@@ -1,8 +1,13 @@
 package com.adarsh.crimerecord;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityOptionsCompat;
+import androidx.core.view.ViewCompat;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.view.animation.Animation;
@@ -12,6 +17,14 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.adarsh.crimerecord.Retro.Api;
+import com.adarsh.crimerecord.Retro.Api_client;
+import com.adarsh.crimerecord.Retro.CitizenLoginModel;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class CitizenLogin extends AppCompatActivity {
 
@@ -59,13 +72,55 @@ public class CitizenLogin extends AppCompatActivity {
 
     }
 
+
     public void register(View view) {
 
-        startActivity(new Intent(this,CitizenSignUp.class));
+       Intent i=new Intent(this,CitizenSignUp.class);
+       startActivity(i);
     }
 
     public void loginButton(View view) {
-        Intent i=new Intent(CitizenLogin.this,CitizenHome.class);
-        startActivity(i);
+        if(email.getText().toString().equals(""))
+        {
+         email.setError("enter email");
+        }
+        else if(password.getText().toString().equals(""))
+        {
+          password.setError("enter password");
+        }
+        else {
+            Api api = Api_client.CitizenRegister().create(Api.class);
+            final String s_email = email.getText().toString();
+            String s_pswd = password.getText().toString();
+
+            api.CITIZEN_LOGIN_MODEL_CALL(s_email, s_pswd).enqueue(new Callback<CitizenLoginModel>() {
+                @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
+                @Override
+                public void onResponse(Call<CitizenLoginModel> call, Response<CitizenLoginModel> response) {
+                    CitizenLoginModel citizenLoginModel = response.body();
+                    String status = citizenLoginModel.getStatus();
+                    if (status.equalsIgnoreCase("Success")) {
+                        int userid= citizenLoginModel.getUser_id();
+
+                        SharedPreferences sharedPreferences=getApplicationContext().getSharedPreferences("userpref",MODE_PRIVATE);
+                        SharedPreferences.Editor editor=sharedPreferences.edit();
+                        editor.putInt("key1",userid);
+                        editor.putString("key2",s_email);
+                        editor.apply();
+                        Toast.makeText(CitizenLogin.this, status, Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(CitizenLogin.this, CitizenHome.class);
+                        startActivity(intent);
+                    } else {
+                        Toast.makeText(CitizenLogin.this, "Login failed", Toast.LENGTH_SHORT).show();
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<CitizenLoginModel> call, Throwable t) {
+
+                }
+            });
+        }
+
     }
 }

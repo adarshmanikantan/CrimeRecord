@@ -150,7 +150,7 @@
         android:layout_marginLeft="10dp"
         android:layout_marginRight="30dp"
         android:layout_height="wrap_content"
-        android:text="Complaint Type"/>
+        android:text="Complaint Details"/>
     <EditText
         android:id="@+id/detailsedit"
         android:layout_width="match_parent"
@@ -169,11 +169,12 @@
         android:text="Submit"
         android:textColor="@color/grey"
         android:elevation="30dp"
+        android:onClick="complaintSubmitClick"
         android:layout_below="@id/detailsedit"
         android:layout_alignParentRight="true"
         android:layout_marginRight="10dp"
         android:layout_marginTop="10dp"
         android:background="@color/cranePurple"/>
-"/>
+
 </RelativeLayout>
 </ScrollView>
