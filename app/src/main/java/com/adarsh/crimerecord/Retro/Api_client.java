@@ -8,7 +8,7 @@ public class Api_client {
 
     public static Retrofit CitizenRegister() {
         retrofit = new Retrofit.Builder()
-                .baseUrl("https://sicspython.herokuapp.com/")
+                .baseUrl("https://srishtis.herokuapp.com/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         return retrofit;

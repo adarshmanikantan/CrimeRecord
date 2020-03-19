@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.adarsh.crimerecord.Citizen.CitizenProfileFragment;
+import com.adarsh.crimerecord.Citizen.IpcFragment;
 import com.adarsh.crimerecord.Citizen.MainFragment;
 
 import com.adarsh.crimerecord.Citizen.MenuuAdapter;
@@ -113,12 +114,13 @@ public class CitizenHome extends AppCompatActivity implements DuoMenuView.OnMenu
 
         // Navigate to the right fragment
         switch (position) {
-            case 1:
-                goToFragment(new RequestFragment(),false);
+            case 2:
+                goToFragment(new IpcFragment(),false);
                 break;
             case 3:
                 goToFragment(new CitizenProfileFragment(),false);
                 break;
+
             default:
                 goToFragment(new MainFragment(), false);
                 break;

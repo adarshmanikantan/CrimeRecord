@@ -1,5 +1,7 @@
 package com.adarsh.crimerecord.Retro;
 
+import com.adarsh.crimerecord.Citizen.IPCSections;
+
 import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -23,4 +25,24 @@ public interface Api{
     @POST("complaint/postcomplaint/")
     Call<ComplaintsListModel>POST_COMPLAINT_RESPONSE_MODEL_CALL();
 
+    @GET("authority/authlogin/")
+    Call<AuthorityLoginModel>AUTHORITY_LOGIN_MODEL_CALL(@Query("email")String email,@Query("password")String password);
+
+    @POST("authority/policereg/")
+    Call<AddPoliceResponseModel>ADD_POLICE_RESPONSE_MODEL_CALL(@Body RequestBody requestBody);
+
+    @GET("/authority/police/?district=Chengalpattu")
+    Call<PoliceStationByDistrictModel>POLICE_STATION_BY_DISTRICT_MODEL_CALL(@Query("district")String district);
+
+    @GET("authority/policelogin/?")
+    Call<PoliceLoginModel>POLICE_LOGIN_MODEL_CALL(@Query("code")String code,@Query("password")String password);
+
+    @GET("complaint/policeview/")
+    Call<ViewComplaintsByPoliceStationModel>VIEW_COMPLAINTS_BY_POLICE_STATION_MODEL_CALL(@Query("police_station")String policestation);
+
+    @GET("complaint/Compalintverify/?complaint_id=1")
+    Call<ComplaintVerificationModel>COMPLAINT_VERIFICATION_MODEL_CALL(@Query("complaint_id")int complaintid);
+
+    @GET("complaint/IPCSections/")
+    Call<IpcModel>IPC_MODEL_CALL();
 }

@@ -4,6 +4,8 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -13,7 +15,20 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Citizen.ComplaintEncryption"></activity>
+        <activity android:name=".Citizen.IPCSections"></activity>
+        <activity android:name=".Police.FirActivity" />
+        <activity android:name=".Police.GenerateFir" />
+        <activity android:name=".Police.ViewComplaintDetails" />
+        <activity android:name=".Police.ViewComplaints" />
+        <activity android:name=".Police.PoliceHome" />
+        <activity android:name=".Police.PoliceLogin" />
+        <activity android:name=".Authority.ViewPoliceStations" />
+        <activity android:name=".Authority.AddPoliceStationActivity" />
+        <activity android:name=".Authority.AuthorityHome" />
+        <activity
+            android:name=".Authority.AuthorityLogin"
+            android:theme="@style/Theme.Shrine" />
+        <activity android:name=".Citizen.ComplaintEncryption" />
         <activity android:name=".Citizen.ComplaintStatus" />
         <activity android:name=".Testsignup" />
         <activity android:name=".Citizen.FileComplaint" />

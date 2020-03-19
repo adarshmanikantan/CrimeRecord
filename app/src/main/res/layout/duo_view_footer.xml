@@ -11,6 +11,7 @@
         android:layout_centerVertical="true"
         android:layout_marginBottom="32dp"
         android:layout_marginLeft="32dp"
+        android:visibility="invisible"
         android:background="@color/colorBlack"
         android:gravity="center"
         android:minWidth="@android:dimen/thumbnail_width"

@@ -1,4 +1,4 @@
-package com.adarsh.crimerecord.Retro;
+package com.adarsh.crimerecord.Adapter;
 
 import android.content.Context;
 import android.content.Intent;
@@ -6,23 +6,25 @@ import android.content.SharedPreferences;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.adarsh.crimerecord.Citizen.ComplaintEncryption;
+import com.adarsh.crimerecord.Police.ViewComplaintDetails;
 import com.adarsh.crimerecord.R;
+import com.adarsh.crimerecord.Retro.ComplaintStatusModel;
+import com.adarsh.crimerecord.Retro.ViewComplaintsByPoliceStationModel;
 
 
-public class ComplaintListAdapter extends RecyclerView.Adapter<ComplaintListAdapter.myViewHolder>{
-    ComplaintStatusModel complaintStatusModel;
+public class ComplaintListPoliceStationAdapter extends RecyclerView.Adapter<ComplaintListPoliceStationAdapter.myViewHolder>{
+    ViewComplaintsByPoliceStationModel complaintStatusModel;
     Context context;
     int complaint_id;
     String district,police_station,complaint_type,
      place,date, time, details, flagset;
-    public ComplaintListAdapter(Context context,ComplaintStatusModel complaintStatusModel)
+    public ComplaintListPoliceStationAdapter(Context context, ViewComplaintsByPoliceStationModel complaintStatusModel)
     {
      this.complaintStatusModel=complaintStatusModel;
      this.context=context;
@@ -31,7 +33,7 @@ public class ComplaintListAdapter extends RecyclerView.Adapter<ComplaintListAdap
     @Override
     public myViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.crime_row, parent, false);
+                .inflate(R.layout.crime_row_police, parent, false);
         int position=parent.indexOfChild(itemView);
         itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -46,32 +48,23 @@ public class ComplaintListAdapter extends RecyclerView.Adapter<ComplaintListAdap
     public void onBindViewHolder(@NonNull final myViewHolder holder, final int position) {
 
 
-        date=complaintStatusModel.getCitizenData().getResults().get(position).getDate();
-        flagset=complaintStatusModel.getCitizenData().getResults().get(position).getFlagset();
-        if(flagset.equals("1"))
-        {
-            holder.imageView.setImageResource(R.drawable.ic_verified_user_black_24dp);
-           // holder.imageView.setVisibility(View.VISIBLE);
-        }
-        else
-        {
-            holder.imageView.setVisibility(View.INVISIBLE);
-        }
+        date=complaintStatusModel.getComplaintData().getResults().get(position).getDate();
+        holder.name.setText(complaintStatusModel.getComplaintData().getResults().get(position).getComplaint_type());
         holder.textView.setText(date);
 
       holder.itemView.setOnClickListener(new View.OnClickListener() {
           @Override
           public void onClick(View v) {
-              complaint_id=complaintStatusModel.getCitizenData().getResults().get(position).getId();
-              district=complaintStatusModel.getCitizenData().getResults().get(position).getDistrict();
-              police_station=complaintStatusModel.getCitizenData().getResults().get(position).getPolice_Station();
-              complaint_type=complaintStatusModel.getCitizenData().getResults().get(position).getComplaint_type();
-              place=complaintStatusModel.getCitizenData().getResults().get(position).getPlace_of_occurence();
-              date=complaintStatusModel.getCitizenData().getResults().get(position).getDate();
-              time=complaintStatusModel.getCitizenData().getResults().get(position).getTime();
-              details=complaintStatusModel.getCitizenData().getResults().get(position).getDetails();
-              flagset=complaintStatusModel.getCitizenData().getResults().get(position).getFlagset();
-              SharedPreferences sharedPreferences=context.getSharedPreferences("complaint_status",Context.MODE_PRIVATE);
+              complaint_id=complaintStatusModel.getComplaintData().getResults().get(position).getId();
+              district=complaintStatusModel.getComplaintData().getResults().get(position).getDistrict();
+              police_station=complaintStatusModel.getComplaintData().getResults().get(position).getPolice_Station();
+              complaint_type=complaintStatusModel.getComplaintData().getResults().get(position).getComplaint_type();
+              place=complaintStatusModel.getComplaintData().getResults().get(position).getPlace_of_occurence();
+              date=complaintStatusModel.getComplaintData().getResults().get(position).getDate();
+              time=complaintStatusModel.getComplaintData().getResults().get(position).getTime();
+              details=complaintStatusModel.getComplaintData().getResults().get(position).getDetails();
+              flagset=complaintStatusModel.getComplaintData().getResults().get(position).getFlagset();
+              SharedPreferences sharedPreferences=context.getSharedPreferences("complaint",Context.MODE_PRIVATE);
               SharedPreferences.Editor editor=sharedPreferences.edit();
 
               editor.putInt("complaint_id",complaint_id);
@@ -84,7 +77,7 @@ public class ComplaintListAdapter extends RecyclerView.Adapter<ComplaintListAdap
               editor.putString("details",details);
               editor.putString("flagset",flagset);
               editor.apply();
-              Intent i=new Intent(context, ComplaintEncryption.class);
+              Intent i=new Intent(context, ViewComplaintDetails.class);
               holder.itemView.getContext().startActivity(i);
           }
       });
@@ -92,17 +85,17 @@ public class ComplaintListAdapter extends RecyclerView.Adapter<ComplaintListAdap
 
     @Override
     public int getItemCount() {
-        return complaintStatusModel.getCitizenData().getResults().size();
+        return complaintStatusModel.getComplaintData().getResults().size();
     }
 
     public class myViewHolder extends RecyclerView.ViewHolder
     {
-        ImageView imageView;
-        TextView textView;
+
+        TextView name,textView;
         public myViewHolder(@NonNull View itemView) {
             super(itemView);
-            textView=itemView.findViewById(R.id.event_date);
-            imageView=itemView.findViewById(R.id.img);
+            name=itemView.findViewById(R.id.citizen_name);
+            textView=itemView.findViewById(R.id.p_event_date);
 
         }
     }

@@ -11,6 +11,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
 
+import com.adarsh.crimerecord.Authority.AuthorityLogin;
+import com.adarsh.crimerecord.Police.PoliceLogin;
+
 public class ProfileChooser extends AppCompatActivity {
 
     LinearLayout linearLayout;
@@ -26,5 +29,15 @@ public class ProfileChooser extends AppCompatActivity {
         Intent i=new Intent(ProfileChooser.this,CitizenLogin.class);
         startActivity(i);
 
+    }
+
+    public void authorityClick(View view) {
+        Intent i=new Intent(ProfileChooser.this, AuthorityLogin.class);
+        startActivity(i);
+    }
+
+    public void policeClick(View view) {
+        Intent i=new Intent(ProfileChooser.this, PoliceLogin.class);
+        startActivity(i);
     }
 }
