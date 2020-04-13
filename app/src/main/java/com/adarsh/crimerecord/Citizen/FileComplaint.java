@@ -12,6 +12,7 @@ import android.text.InputType;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.RelativeLayout;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
@@ -22,9 +23,12 @@ import com.adarsh.crimerecord.Retro.Api;
 import com.adarsh.crimerecord.Retro.Api_client;
 import com.adarsh.crimerecord.Retro.PostComplaintRequestModel;
 import com.adarsh.crimerecord.Retro.PostComplaintResponseModel;
+import com.adarsh.crimerecord.Utils.Utils;
+import com.google.android.material.textfield.TextInputEditText;
 import com.google.gson.Gson;
 
 import java.util.Calendar;
+import java.util.List;
 
 import okhttp3.MediaType;
 import okhttp3.RequestBody;
@@ -33,22 +37,27 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class FileComplaint extends AppCompatActivity {
-EditText district,policestation,complainttype,place,date,time,details;
+    RelativeLayout complaintlayout;
+    EditText district, policestation, complainttype, place, date, time, details;
     TimePickerDialog picker;
     String Json;
     RequestBody requestBody = null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_file_complaint);
+        complaintlayout = findViewById(R.id.complaint_layout);
+        district = findViewById(R.id.district_spinner);
+        policestation = findViewById(R.id.selectps);
+        complainttype = findViewById(R.id.complainttypeedit);
+        place = findViewById(R.id.place_edit);
+        date = findViewById(R.id.date_edit);
+        time = findViewById(R.id.time_edit);
+        details = findViewById(R.id.detailsedit);
 
-        district=findViewById(R.id.district_spinner);
-        policestation=findViewById(R.id.selectps);
-        complainttype=findViewById(R.id.complainttypeedit);
-        place=findViewById(R.id.place_edit);
-        date=findViewById(R.id.date_edit);
-        time=findViewById(R.id.time_edit);
-        details=findViewById(R.id.detailsedit);
+
+
 
         date.setInputType(InputType.TYPE_NULL);
         date.setOnClickListener(new View.OnClickListener() {
@@ -90,19 +99,34 @@ EditText district,policestation,complainttype,place,date,time,details;
     }
 
     public void complaintSubmitClick(View view) {
-        SharedPreferences sharedPreferences=getApplicationContext().getSharedPreferences("userpref",MODE_PRIVATE);
-        int userid=sharedPreferences.getInt("key1",0);
-        String string_district=district.getText().toString();
-        String string_policestation=policestation.getText().toString();
-        String string_complainttype=complainttype.getText().toString();
-        String string_place=place.getText().toString();
-        String string_date=date.getText().toString();
-        String string_time=time.getText().toString();
-        String string_details=details.getText().toString();
+        List<EditText> editTexts = Utils.findViewsWithType(
+                complaintlayout, EditText.class);
+        boolean noErrors = true;
+        for (EditText editText : editTexts) {
+            //get strings from each edittext
+            String editTextString = editText.getText().toString();
+            if (editTextString.isEmpty()) {
+                editText.setError(("please fill this field"));
+                noErrors = false;
+            } else {
+                editText.setError(null);
+            }
+        }
+        if(noErrors)
+        {
+        SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences("userpref", MODE_PRIVATE);
+        int userid = sharedPreferences.getInt("key1", 0);
+        String string_district = district.getText().toString();
+        String string_policestation = policestation.getText().toString();
+        String string_complainttype = complainttype.getText().toString();
+        String string_place = place.getText().toString();
+        String string_date = date.getText().toString();
+        String string_time = time.getText().toString();
+        String string_details = details.getText().toString();
 
-       Api api= Api_client.CitizenRegister().create(Api.class);
+        Api api = Api_client.CitizenRegister().create(Api.class);
 
-        final PostComplaintRequestModel postComplaintRequestModel=new PostComplaintRequestModel();
+        final PostComplaintRequestModel postComplaintRequestModel = new PostComplaintRequestModel();
 
         postComplaintRequestModel.setOwner_id(userid);
         postComplaintRequestModel.setDistrict(string_district);
@@ -122,26 +146,24 @@ EditText district,policestation,complainttype,place,date,time,details;
             e.printStackTrace();
             Toast.makeText(FileComplaint.this, "" + e, Toast.LENGTH_SHORT).show();
         }
-     api.POST_COMPLAINT_RESPONSE_MODEL_CALL(requestBody).enqueue(new Callback<PostComplaintResponseModel>() {
-         @Override
-         public void onResponse(Call<PostComplaintResponseModel> call, Response<PostComplaintResponseModel> response) {
-             PostComplaintResponseModel postComplaintResponseModel=response.body();
-             if(postComplaintResponseModel.getStatus().equalsIgnoreCase("success"))
-             {
-                 Toast.makeText(FileComplaint.this, postComplaintResponseModel.getStatus(), Toast.LENGTH_SHORT).show();
-                 Intent i=new Intent(FileComplaint.this, CitizenHome.class);
-                 startActivity(i);
-             }
-             else
-             {
-                 Toast.makeText(FileComplaint.this, "Failed", Toast.LENGTH_SHORT).show();
-             }
-         }
+        api.POST_COMPLAINT_RESPONSE_MODEL_CALL(requestBody).enqueue(new Callback<PostComplaintResponseModel>() {
+            @Override
+            public void onResponse(Call<PostComplaintResponseModel> call, Response<PostComplaintResponseModel> response) {
+                PostComplaintResponseModel postComplaintResponseModel = response.body();
+                if (postComplaintResponseModel.getStatus().equalsIgnoreCase("success")) {
+                    Toast.makeText(FileComplaint.this, postComplaintResponseModel.getStatus(), Toast.LENGTH_SHORT).show();
+                    Intent i = new Intent(FileComplaint.this, CitizenHome.class);
+                    startActivity(i);
+                } else {
+                    Toast.makeText(FileComplaint.this, "Failed", Toast.LENGTH_SHORT).show();
+                }
+            }
 
-         @Override
-         public void onFailure(Call<PostComplaintResponseModel> call, Throwable t) {
-             Toast.makeText(FileComplaint.this, t.getMessage(), Toast.LENGTH_SHORT).show();
-         }
-     });
+            @Override
+            public void onFailure(Call<PostComplaintResponseModel> call, Throwable t) {
+                Toast.makeText(FileComplaint.this, t.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
     }
+}
 }

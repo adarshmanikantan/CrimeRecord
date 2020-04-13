@@ -3,23 +3,23 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    >
+    android:background="@color/cranePurpleDark">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:gravity="center"
-        android:layout_gravity="center"
-      >
+        android:layout_marginTop="90dp"
+        android:background="@color/cranePurpleDark">
 
 
         <LinearLayout
+            android:id="@+id/file_pcc_layout"
             android:layout_width="match_parent"
             android:layout_height="150dp"
             android:layout_margin="25dp"
             android:elevation="25dp"
-            android:onClick="viewComplaintsClick"
-            android:background="#B0000000">
+            android:background="@color/cranePurple">
             <ImageView
                 android:layout_width="80dp"
                 android:layout_height="80dp"
@@ -34,32 +34,31 @@
                 android:textColor="@color/grey"
                 android:textSize="25sp"
                 android:layout_gravity="center"
-                android:text="View Complaints"/>
+                android:text="Request for Police Clearance Certificate"/>
 
         </LinearLayout>
         <LinearLayout
-            android:id="@+id/file_complaint_layout"
+            android:id="@+id/pcc_status_layout"
             android:layout_width="match_parent"
             android:layout_height="150dp"
             android:layout_margin="25dp"
             android:elevation="25dp"
-            android:onClick="viewFirClick"
-            android:background="#B0000000">
+            android:background="@color/cranePurple"
+            >
             <ImageView
                 android:layout_width="80dp"
                 android:layout_height="80dp"
-                android:scaleType="centerCrop"
-                android:src="@drawable/complaint"
+                android:src="@drawable/status"
                 android:layout_gravity="left|center_vertical"
                 android:layout_margin="20dp"
                 />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/grey"
-                android:textSize="25sp"
+                android:text="Your Police Clearance Certificate"
                 android:layout_gravity="center"
-                android:text="View Complaints"/>
+                android:textSize="25sp"
+                android:textColor="@color/grey"/>
 
         </LinearLayout>
 

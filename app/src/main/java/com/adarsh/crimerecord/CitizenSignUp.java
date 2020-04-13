@@ -211,7 +211,7 @@ public class CitizenSignUp extends AppCompatActivity {
                             citizenRegisterRequest.setDist(district);
                             citizenRegisterRequest.setSubdist(subdistrict);
                             citizenRegisterRequest.setState(state);
-                            citizenRegisterRequest.setPc(postCode);
+                            citizenRegisterRequest.setPc("1");
 
                             Gson gson = new Gson();
                             Json = gson.toJson(citizenRegisterRequest).trim();

@@ -15,7 +15,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Citizen.IPCSections"></activity>
+        <activity android:name=".Citizen.ViewPCC"></activity>
+        <activity android:name=".Citizen.FilePCC" />
+        <activity android:name=".Police.ViewFir" />
+        <activity android:name=".Citizen.IPCSections" />
         <activity android:name=".Police.FirActivity" />
         <activity android:name=".Police.GenerateFir" />
         <activity android:name=".Police.ViewComplaintDetails" />

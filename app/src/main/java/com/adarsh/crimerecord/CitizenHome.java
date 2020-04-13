@@ -16,6 +16,7 @@ import com.adarsh.crimerecord.Citizen.IpcFragment;
 import com.adarsh.crimerecord.Citizen.MainFragment;
 
 import com.adarsh.crimerecord.Citizen.MenuuAdapter;
+import com.adarsh.crimerecord.Citizen.PCCFragment;
 import com.adarsh.crimerecord.Citizen.RequestFragment;
 import com.adarsh.crimerecord.R;
 
@@ -77,8 +78,8 @@ public class CitizenHome extends AppCompatActivity implements DuoMenuView.OnMenu
         TextView staffname=mViewHolder.mDuoMenuView.getHeaderView().findViewById(R.id.duo_headername);
         TextView staffpost=mViewHolder.mDuoMenuView.getHeaderView().findViewById(R.id.duo_view_headerpost);
 
-        staffname.setText("Adarsh M");
-        staffpost.setText("MCA");
+        staffname.setText("");
+        staffpost.setText("");
         mViewHolder.mDuoMenuView.setOnMenuClickListener(this);
         mViewHolder.mDuoMenuView.setBackground(R.color.red);
         mViewHolder.mDuoMenuView.setAdapter(mMenuAdapter);
@@ -114,6 +115,9 @@ public class CitizenHome extends AppCompatActivity implements DuoMenuView.OnMenu
 
         // Navigate to the right fragment
         switch (position) {
+            case 1:
+                goToFragment(new PCCFragment(),false);
+                break;
             case 2:
                 goToFragment(new IpcFragment(),false);
                 break;

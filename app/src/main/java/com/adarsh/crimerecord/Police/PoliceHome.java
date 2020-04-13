@@ -22,8 +22,9 @@ public class PoliceHome extends AppCompatActivity {
       startActivity(i);
     }
 
-    public void generateFir(View view) {
-        Intent i=new Intent(PoliceHome.this,GenerateFir.class);
+
+    public void viewFirClick(View view) {
+        Intent i=new Intent(PoliceHome.this,ViewFir.class);
         startActivity(i);
     }
 }

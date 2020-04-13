@@ -45,4 +45,7 @@ public interface Api{
 
     @GET("complaint/IPCSections/")
     Call<IpcModel>IPC_MODEL_CALL();
+
+    @GET("fir/firdetails/?")
+    Call<ViewFirModel>VIEW_FIR_MODEL_CALL(@Query("police_id")int policeid);
 }

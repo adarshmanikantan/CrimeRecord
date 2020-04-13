@@ -9,6 +9,7 @@ import android.view.View;
 
 public class MainActivity extends AppCompatActivity {
     private static int SPLASH_TIME_OUT = 3000;
+    private static final int PERMISSION_REQUEST_CODE = 200;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
             public void run() {
                 // This method will be executed once the timer is over
                 // Start your app main activity
+
                 Intent i = new Intent(getApplicationContext(),ProfileChooser.class);
                 startActivity(i);
 
